@@ -1,0 +1,453 @@
+<style>
+body{
+  margin:0;
+  background:url('https://i.ibb.co/20GgjYTG/xatspace.jpg') center/cover fixed;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.xat{
+  width:420px;
+  margin:30px auto;
+  background:linear-gradient(135deg,#ff3f9e,#ff79c6);
+  border-radius:20px;
+  box-shadow:0 0 30px rgba(0,0,0,.5);
+  padding:15px;
+  color:#fff;
+}
+
+.top{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.avatar{
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  border:3px solid #fff;
+  background:url('https://xatimg.com/image/wvSCp6qGc9Z4.png') center/cover;
+  transition: transform 0.8s ease;
+  cursor: pointer;
+}
+
+.avatar:hover{
+  transform: scale(1.2);
+}
+
+.name{
+  font-size:22px;
+  font-weight:bold;
+}
+
+.id{
+  font-size:12px;
+  opacity:.8;
+}
+
+.box{
+  margin-top:15px;
+  background:rgba(255,255,255,.15);
+  border-radius:15px;
+  padding:12px;
+}
+
+.box p{
+  margin:5px 0;
+  font-size:14px;
+}
+
+.photo img{
+  width:100%;
+  border-radius:15px;
+  cursor: pointer;
+  transition: transform 0.8s ease;
+}
+
+.photo img:hover{
+  transform: scale(1.15);
+}
+
+.photo img.zoomed{
+  animation: zoomIn 0.8s ease forwards;
+}
+
+@keyframes zoomIn {
+  from {
+    position: absolute;
+    width: 100%;
+    border-radius: 15px;
+  }
+  to {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 90vw;
+    max-width: 600px;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    border-radius: 15px;
+    cursor: pointer;
+  }
+}
+
+.overlay{
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.overlay.active{
+  display: block;
+  opacity: 1;
+}
+
+.music{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.btn{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:#fff;
+  color:#ff3f9e;
+  text-align:center;
+  line-height:38px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.footer{
+  text-align:center;
+  font-size:11px;
+  opacity:.7;
+  margin-top:10px;
+}
+
+.volume-container{
+  display:none;
+  margin-top:10px;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+}
+
+.volume-container.active{
+  display:flex;
+  animation:slideDown 0.5s ease;
+}
+
+.volume-label{
+  min-width:30px;
+  cursor:pointer;
+  position:relative;
+  user-select:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.volume-label svg{
+  filter: drop-shadow(0 0 6px #ff3f9e) drop-shadow(0 0 3px #ff79c6);
+  transition: transform 0.2s ease;
+}
+
+.volume-label:hover svg{
+  transform: scale(1.1);
+}
+
+.volume-label.muted::after{
+  content:'✖';
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  color:#fff;
+  font-size:20px;
+  font-weight:bold;
+  text-shadow:0 0 8px #ff3f9e, 0 0 4px #000;
+  animation:popIn 0.3s ease;
+}
+
+@keyframes popIn{
+  from{
+    transform:translate(-50%, -50%) scale(0);
+    opacity:0;
+  }
+  to{
+    transform:translate(-50%, -50%) scale(1);
+    opacity:1;
+  }
+}
+
+@keyframes slideDown{
+  from{
+    opacity:0;
+    transform:translateY(-10px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.volume-slider{
+  width:120px;
+  max-width:120px;
+  height:6px;
+  border-radius:5px;
+  background:rgba(255,255,255,.3);
+  outline:none;
+  -webkit-appearance:none;
+  appearance:none;
+  cursor:pointer;
+}
+
+.volume-slider::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  appearance:none;
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  background:#ff3f9e;
+  cursor:pointer;
+  box-shadow:0 0 5px rgba(255,63,158,.5);
+}
+
+.volume-slider::-moz-range-thumb{
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  background:#ff3f9e;
+  cursor:pointer;
+  border:none;
+  box-shadow:0 0 5px rgba(255,63,158,.5);
+}
+
+.progress-container{
+  display:none;
+  margin-top:10px;
+}
+
+.progress-container.active{
+  display:block;
+  animation:slideDown 0.5s ease;
+}
+
+.progress-slider{
+  width:100%;
+  height:6px;
+  border-radius:5px;
+  background:rgba(255,255,255,.3);
+  outline:none;
+  -webkit-appearance:none;
+  appearance:none;
+  cursor:pointer;
+}
+
+.progress-slider::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  appearance:none;
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  background:#ff3f9e;
+  cursor:pointer;
+  box-shadow:0 0 5px rgba(255,63,158,.5);
+}
+
+.progress-slider::-moz-range-thumb{
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  background:#ff3f9e;
+  cursor:pointer;
+  border:none;
+  box-shadow:0 0 5px rgba(255,63,158,.5);
+}
+</style>
+
+<div class="xat">
+  <div class="top">
+    <div class="avatar"></div>
+    <div>
+      <div class="name">𝒫𝒶𝓇𝓀</div>
+      <div class="id">ID: 1559430787</div>
+    </div>
+  </div>
+
+  <div class="box">
+    <p><b>País:</b> Peru</p>
+    <p><b>Cumpleaño:</b> 10 octubre</p>
+    <p><b>Signo:</b> Libra</p>
+    <p><b>Nick:</b> HatsuneeMiku</p>
+    <p><b>Musica:</b> Is this love - Whitesnake</p>
+    <p><b>Expert en:</b> 🎮 Fortnite + LOL</p>
+  </div>
+
+  <div class="box photo">
+    <img src="https://i.ibb.co/k6rT4BGc/image.jpg">
+  </div>
+
+  <div class="box music">
+    <div class="btn" onclick="play()">▶</div>
+    <div id="txt"></div>
+  </div>
+
+  <div class="progress-container" id="progressContainer">
+    <input type="range" id="progressSlider" class="progress-slider" min="0" max="100" value="0">
+  </div>
+
+  <div class="volume-container" id="volumeContainer">
+    <span class="volume-label" id="volumeIcon" onclick="toggleMute()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="#ff3f9e" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+      </svg>
+    </span>
+    <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="70">
+  </div>
+
+  <audio id="audioPlayer" preload="auto">
+    <source src="whitesnake.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="footer">✦ <a href="https://xat.me/SMuhaEmmadTH" target="_blank" style="color:#fff;text-decoration:none;">Xatspace Pink</a> ✦</div>
+</div>
+
+<script>
+var t = "En cada paso forjo mi destino en la hoguera del dolor.";
+var i = 0;
+var isPlaying = false;
+var audioPlayer = document.getElementById('audioPlayer');
+
+function play(){
+  // Mostrar/esconder o controle de volume e progresso
+  const volumeContainer = document.getElementById('volumeContainer');
+  const progressContainer = document.getElementById('progressContainer');
+  volumeContainer.classList.toggle('active');
+  progressContainer.classList.toggle('active');
+  
+  // Play/Pause da música
+  if(audioPlayer.paused){
+    audioPlayer.play();
+  } else {
+    audioPlayer.pause();
+  }
+  
+  // Iniciar o efeito de digitação se não estiver tocando
+  if(!isPlaying){
+    isPlaying = true;
+    typeText();
+  }
+}
+
+function typeText(){
+  if(i < t.length){
+    document.getElementById('txt').innerHTML += t.charAt(i);
+    i++;
+    setTimeout(typeText, 60);
+  }
+}
+
+// Controle de volume
+const volumeIcon = document.getElementById('volumeIcon');
+let isMuted = false;
+let lastVolume = 70;
+
+document.getElementById('volumeSlider').addEventListener('input', function(){
+  audioPlayer.volume = this.value / 100;
+  if(this.value > 0 && isMuted){
+    isMuted = false;
+    volumeIcon.classList.remove('muted');
+  }
+});
+
+function toggleMute(){
+  isMuted = !isMuted;
+  if(isMuted){
+    lastVolume = document.getElementById('volumeSlider').value;
+    audioPlayer.volume = 0;
+    document.getElementById('volumeSlider').value = 0;
+    volumeIcon.classList.add('muted');
+  } else {
+    audioPlayer.volume = lastVolume / 100;
+    document.getElementById('volumeSlider').value = lastVolume;
+    volumeIcon.classList.remove('muted');
+  }
+}
+
+// Controle de progresso
+const progressSlider = document.getElementById('progressSlider');
+
+audioPlayer.addEventListener('timeupdate', function(){
+  if(audioPlayer.duration){
+    progressSlider.value = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+  }
+});
+
+progressSlider.addEventListener('input', function(){
+  if(audioPlayer.duration){
+    audioPlayer.currentTime = (this.value / 100) * audioPlayer.duration;
+  }
+});
+
+function toggleProgress(){
+  const progressContainer = document.getElementById('progressContainer');
+  progressContainer.classList.toggle('active');
+}
+
+// Zoom na imagem ao clicar
+const photoImg = document.querySelector('.photo img');
+const overlay = document.querySelector('.overlay') || createOverlay();
+
+function createOverlay() {
+  const div = document.createElement('div');
+  div.className = 'overlay';
+  document.body.appendChild(div);
+  return div;
+}
+
+if (photoImg) {
+  photoImg.addEventListener('click', function(e) {
+    e.stopPropagation();
+    const isZoomed = this.classList.contains('zoomed');
+    
+    if (!isZoomed) {
+      this.classList.add('zoomed');
+      overlay.classList.add('active');
+    } else {
+      this.classList.remove('zoomed');
+      overlay.classList.remove('active');
+    }
+  });
+  
+  overlay.addEventListener('click', function() {
+    photoImg.classList.remove('zoomed');
+    this.classList.remove('active');
+  });
+  
+  // Suporte para touch
+  photoImg.addEventListener('touchend', function(e) {
+    e.stopPropagation();
+    const isZoomed = this.classList.contains('zoomed');
+    
+    if (!isZoomed) {
+      this.classList.add('zoomed');
+      overlay.classList.add('active');
+    } else {
+      this.classList.remove('zoomed');
+      overlay.classList.remove('active');
+    }
+  });
+}
+</script>

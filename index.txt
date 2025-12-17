@@ -1,0 +1,125 @@
+<style>
+body{
+  margin:0;
+  background:url('https://i.ibb.co/20GgjYTG/xatspace.jpg') center/cover fixed;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.xat{
+  width:420px;
+  margin:30px auto;
+  background:linear-gradient(135deg,#ff3f9e,#ff79c6);
+  border-radius:20px;
+  box-shadow:0 0 30px rgba(0,0,0,.5);
+  padding:15px;
+  color:#fff;
+}
+
+.top{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.avatar{
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  border:3px solid #fff;
+  background:url('https://i.ibb.co/k6rT4BGc/image.jpg') center/cover;
+}
+
+.name{
+  font-size:22px;
+  font-weight:bold;
+}
+
+.id{
+  font-size:12px;
+  opacity:.8;
+}
+
+.box{
+  margin-top:15px;
+  background:rgba(255,255,255,.15);
+  border-radius:15px;
+  padding:12px;
+}
+
+.box p{
+  margin:5px 0;
+  font-size:14px;
+}
+
+.photo img{
+  width:100%;
+  border-radius:15px;
+}
+
+.music{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.btn{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:#fff;
+  color:#ff3f9e;
+  text-align:center;
+  line-height:38px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.footer{
+  text-align:center;
+  font-size:11px;
+  opacity:.7;
+  margin-top:10px;
+}
+</style>
+
+<div class="xat">
+  <div class="top">
+    <div class="avatar"></div>
+    <div>
+      <div class="name">𝒫𝒶𝓇𝓀</div>
+      <div class="id">ID: 1559430787</div>
+    </div>
+  </div>
+
+  <div class="box">
+    <p><b>País:</b> Peru</p>
+    <p><b>Aniversário:</b> 4 de Abril</p>
+    <p><b>Signo:</b> Áries</p>
+    <p><b>Time:</b> América</p>
+    <p><b>Música:</b> Banda</p>
+    <p><b>Expert em:</b> Dormir 😴</p>
+  </div>
+
+  <div class="box photo">
+    <img src="https://i.ibb.co/k6rT4BGc/image.jpg">
+  </div>
+
+  <div class="box music">
+    <div class="btn" onclick="play()">▶</div>
+    <div id="txt"></div>
+  </div>
+
+  <div class="footer">✦ Xatspace Pink ✦</div>
+</div>
+
+<script>
+var t = "Mentalmente só sei que te pertencerei";
+var i = 0;
+function play(){
+  if(i < t.length){
+    document.getElementById('txt').innerHTML += t.charAt(i);
+    i++;
+    setTimeout(play,60);
+  }
+}
+</script>
